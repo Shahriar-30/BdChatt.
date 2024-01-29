@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #eee;
+}
+
+@layer components{
+    .Dark{
+        @apply  dark:text-white dark:bg-black
+    }
+    .logo{
+        @apply w-full max-w-[200px] 
+    }
+    .tag{
+        @apply text-[15px] font-bold tracking-wide mt-[-7px] text-[rgba(0,0,0,0.47)] dark:text-[rgba(255,255,255,0.81)]
+    }
+    .form_box{
+        @apply w-full min-w-[299px] max-w-[300px] relative
+    }
+    .form_title{
+        @apply w-fit bg-[#eee] px-[10px] font-semibold text-[15px] relative left-[16px] bottom-[-15px] Dark
+    }
+    .form_input {
+        @apply w-full bg-[#eee] py-2 mt-[5px] indent-[20px] font-bold tracking-wide outline-none border-2 border-solid border-[rgba(0,0,0,0.61)] rounded-lg Dark dark:border-[#eee]
+    }
+    .form_err{
+        @apply w-full max-w-[280px] font-bold text-red-500  mt-[2px] ml-[5px] px-[10px] rounded absolute text-right
+    }
+    .form_btn{
+        @apply w-full h-[35px] bg-prime text-white font-semibold tracking-wide mt-[30px] rounded hover:bg-[#1b267f] flex gap-1 items-center justify-center
+    }
+    .people{
+        @apply bg-[#eee] mt-2 p-2 rounded flex items-center justify-between 
+    }
+    .people_one{
+        @apply bg-[#eee] mt-2 p-2 rounded flex items-center justify-between gap-2
+    }
+}
