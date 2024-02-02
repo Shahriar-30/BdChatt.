@@ -11,8 +11,18 @@ function PeopleHome() {
     let data = useSelector((e) => {
         return e.user
     })
+    const [makeUser, setMakeUser] = useState('');
 
     const [info, setInfo] = useState([])
+
+    useEffect(() => {
+        const starCountRef = ref(db, 'request/');
+        onValue(starCountRef, (snapshot) => {
+            snapshot.forEach((e) => {
+                setMakeUser(e.val().senderId + e.val().receverId);
+            });
+        })
+    }, [])
 
     useEffect(() => {
 
@@ -34,13 +44,13 @@ function PeopleHome() {
         const requestRef = ref(db, 'request/');
 
         const newRequest = {
-            requestBy: data.displayName,
-            requestById: data.uid,
-            requestByEmail: data.email,
+           sender: data.displayName,
+           senderId: data.uid,
+           senderEmail: data.email,
             // =====
-            requestTo: e.displayName,
-            requestId: e.id,
-            requestEmail: e.email,
+            recever: e.displayName,
+            receverId: e.id,
+            receverEmail: e.email,
         };
 
         push(requestRef, newRequest)
@@ -54,7 +64,7 @@ function PeopleHome() {
 
     };
 
-
+    console.log(makeUser);
     return (
         <>
             <ToastContainer
@@ -89,9 +99,16 @@ function PeopleHome() {
                                         <h3 className=' font-bold text-[17px] h-[40px]  dark:text-[#eee] '>{e.displayName}</h3>
                                     </div>
                                 </div>
-                                <div onClick={() => sendRequest(e)} className='] cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md dark:text-[#eee]'>
-                                    <MdAdd />
-                                </div>
+                                {
+                                    makeUser.includes(data.uid + e.id) ||  makeUser.includes(e.id + data.uid) ?
+                                        <div className='cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md dark:text-[#eee]'>
+                                            -
+                                        </div>
+                                        :
+                                        <div onClick={() => sendRequest(e)} className=' cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md dark:text-[#eee]'>
+                                            <MdAdd />
+                                        </div>
+                                }
                             </div>
                         ))
                     }

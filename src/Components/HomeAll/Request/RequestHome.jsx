@@ -20,7 +20,7 @@ function RequestHome() {
             // const data = snapshot.val()
             let Data = [];
             snapshot.forEach((e) => {
-                if (data.uid == e.val().requestId) {
+                if (data.uid == e.val().receverId) {
                     Data.push({ ...e.val(), id: e.key })
                 }
                 // console.log(e.val().requestId);
@@ -50,7 +50,7 @@ function RequestHome() {
                                 <div className='  people_one dark:bg-[#495057]'>
                                     <img src="simon.png" className=' w-[40px] h-[40px] rounded-full' />
                                     <div>
-                                        <h3 className=' font-bold text-[17px]  dark:text-[#eee]'>{e.requestBy}</h3>
+                                        <h3 className=' font-bold text-[17px]  dark:text-[#eee]'>{e.sender}</h3>
                                     </div>
                                 </div>
                                 <div className='] cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md  dark:text-[#eee]'>
