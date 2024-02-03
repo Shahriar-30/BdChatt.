@@ -7,10 +7,12 @@ import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
 function PeopleHome() {
-
+    
     let data = useSelector((e) => {
         return e.user
     })
+    const [allFriend, setAllFriend] = useState([]);
+    
     const [makeUser, setMakeUser] = useState('');
 
     const [info, setInfo] = useState([])
@@ -40,6 +42,24 @@ function PeopleHome() {
 
     }, [])
 
+
+
+    useEffect(() => {
+
+        const starCountRef = ref(db, 'friend/');
+        onValue(starCountRef, (snapshot) => {
+            let Data = [];
+            snapshot.forEach((e) => {
+                if (data.uid == e.val().receverId) {
+                    Data.push({ ...e.val(), id: e.key })
+                }
+            });
+            setAllFriend(Data);
+        })
+
+    }, [])
+
+
     const sendRequest = (e) => {
         const requestRef = ref(db, 'request/');
 
@@ -64,7 +84,7 @@ function PeopleHome() {
 
     };
 
-    console.log(makeUser);
+    // console.log(makeUser);
     return (
         <>
             <ToastContainer

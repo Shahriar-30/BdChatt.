@@ -1,8 +1,9 @@
-import Reac, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MdAdd } from "react-icons/md";
 import { MdEmojiPeople } from "react-icons/md";
 import { db } from '../../../../FireBase';
-import { ref, onValue, set, push } from "firebase/database";
+import { ref, onValue, set, push, remove } from "firebase/database";
+import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 
 function RequestHome() {
@@ -34,8 +35,32 @@ function RequestHome() {
     // console.log(info.requestId);
 
 
+    let makeFriend = (e) => {
+        set(push(ref(db, 'friend/')), {
+            ...e,
+        }).then(() => {
+            remove(ref(db, 'request/' + e.id)).then(() => {
+                toast.success(`Friend Request Confirm`);
+            })
+        })
+    }
+
+
     return (
         <>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition:Bounce
+            />
             <div className='w-full  min-w-[300px] max-w-[320px] bg-[#fff]  rounded-md p-2 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] dark:bg-[#212529]'>
                 <div className=' w-full flex gap-1 items-center p-1 pl-2  border-b-[3px] border-[#eee]  '>
                     <MdEmojiPeople className='font-bold text-[28px] text-prime' />
@@ -53,7 +78,7 @@ function RequestHome() {
                                         <h3 className=' font-bold text-[17px]  dark:text-[#eee]'>{e.sender}</h3>
                                     </div>
                                 </div>
-                                <div className='] cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md  dark:text-[#eee]'>
+                                <div onClick={() => makeFriend(e)} className=' cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md  dark:text-[#eee]'>
                                     <MdAdd />
                                 </div>
                             </div>
