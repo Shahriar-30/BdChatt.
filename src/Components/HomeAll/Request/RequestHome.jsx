@@ -78,9 +78,11 @@ function RequestHome() {
                                         <h3 className=' font-bold text-[17px]  dark:text-[#eee]'>{e.sender}</h3>
                                     </div>
                                 </div>
-                                <div onClick={() => makeFriend(e)} className=' cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md  dark:text-[#eee]'>
-                                    <MdAdd />
-                                </div>
+                                <abbr title="Confirm">
+                                    <div onClick={() => makeFriend(e)} className=' cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md  dark:text-[#eee]'>
+                                        <MdAdd />
+                                    </div>
+                                </abbr>
                             </div>
                         ))
                     }

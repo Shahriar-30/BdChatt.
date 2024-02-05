@@ -7,12 +7,12 @@ import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
 function PeopleHome() {
-    
+
     let data = useSelector((e) => {
         return e.user
     })
     const [allFriend, setAllFriend] = useState([]);
-    
+
     const [makeUser, setMakeUser] = useState('');
 
     const [info, setInfo] = useState([])
@@ -64,9 +64,9 @@ function PeopleHome() {
         const requestRef = ref(db, 'request/');
 
         const newRequest = {
-           sender: data.displayName,
-           senderId: data.uid,
-           senderEmail: data.email,
+            sender: data.displayName,
+            senderId: data.uid,
+            senderEmail: data.email,
             // =====
             recever: e.displayName,
             receverId: e.id,
@@ -120,14 +120,16 @@ function PeopleHome() {
                                     </div>
                                 </div>
                                 {
-                                    makeUser.includes(data.uid + e.id) ||  makeUser.includes(e.id + data.uid) ?
+                                    makeUser.includes(data.uid + e.id) || makeUser.includes(e.id + data.uid) ?
                                         <div className='cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md dark:text-[#eee]'>
                                             -
                                         </div>
                                         :
-                                        <div onClick={() => sendRequest(e)} className=' cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md dark:text-[#eee]'>
-                                            <MdAdd />
-                                        </div>
+                                        <abbr title="Add Friend">
+                                            <div onClick={() => sendRequest(e)} className=' cursor-pointer font-extrabold text-[25px] transition-all duration-600 dark:hover:bg-[rgba(255,254,254,0.11)] hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md dark:text-[#eee]'>
+                                                <MdAdd />
+                                            </div>
+                                        </abbr>
                                 }
                             </div>
                         ))
