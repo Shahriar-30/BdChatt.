@@ -31,7 +31,6 @@ function BlockHome() {
 
 
     let deleteFriend = (e) => {
-        console.log(e);
         remove(ref(db, 'block/' + e.id)).then(() => {
             toast.error(`Unfriend Complete`);
         })
