@@ -13,16 +13,18 @@ function PeopleHome() {
     })
     const [allFriend, setAllFriend] = useState([]);
 
-    const [makeUser, setMakeUser] = useState('');
+    const [makeUser, setMakeUser] = useState([]);
 
     const [info, setInfo] = useState([])
 
     useEffect(() => {
         const starCountRef = ref(db, 'request/');
         onValue(starCountRef, (snapshot) => {
+            let Data = []
             snapshot.forEach((e) => {
-                setMakeUser(e.val().senderId + e.val().receverId);
+                Data.push(e.val().senderId + e.val().receverId);
             });
+            setMakeUser(Data)
         })
     }, [])
 
