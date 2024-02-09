@@ -7,21 +7,23 @@ import GroupCreate from './GroupCreate';
 import { useSelector } from 'react-redux';
 
 
-function GroupHome() {
+function GroupAdmin() {
     let data = useSelector((e) => {
         return e.user
     })
 
     const [toggle, setToggle] = useState(false);
     const [groupData, setGroupData] = useState([]);
+    const [admin, setAdmin] = useState(false);
 
     useEffect(() => {
         const starCountRef = ref(db, 'group/');
         onValue(starCountRef, (snapshot) => {
             let Data = [];
             snapshot.forEach((e) => {
-                if (data.uid !== e.val().adminId) {
+                if (data.uid == e.val().adminId) {
                     Data.push({ ...e.val(), id: e.key })
+                    setAdmin(true)
                 }
             });
             setGroupData(Data);
@@ -40,7 +42,7 @@ function GroupHome() {
                 <div className='flex items-center mr-1'>
                     <div className=' w-full flex gap-1 items-center p-1 pl-2  border-b-[3px] border-[#eee]  '>
                         <GiBlackFlag className='font-bold text-[28px] text-prime ' />
-                        <h2 className='font-bold text-[20px] select-none  '>Group</h2>
+                        <h2 className='font-bold text-[20px] select-none  '>Group-Admin</h2>
                     </div>
                     <abbr title="Create Group"></abbr>
                     <div onClick={() => setToggle(!toggle)} className='cursor-pointer font-extrabold text-[25px] transition-all duration-600  hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md'>
@@ -64,6 +66,9 @@ function GroupHome() {
                                     <div className='  cursor-pointer font-extrabold text-[25px] transition-all duration-600  hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md'>
                                         <MdAdd />
                                     </div>
+                                    {admin && <div className='  font-extrabold text-[25px] text-red-500 transition-all duration-600  hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md'>
+                                        <p>A</p>
+                                    </div>}
                                 </div>
                             </div>
                         ))
@@ -79,4 +84,4 @@ function GroupHome() {
     )
 }
 
-export default GroupHome
+export default GroupAdmin

@@ -6,6 +6,7 @@ import FriendsHome from '../HomeAll/Friends/FriendsHome';
 import RequestHome from '../HomeAll/Request/RequestHome';
 import Navbar from '../Navbar/Navbar';
 import { useSelector } from "react-redux";
+import GroupAdmin from '../HomeAll/Group/GroupAdmin';
 
 function Home() {
 
@@ -45,7 +46,7 @@ function Home() {
               </div>
 
               <div className='flex flex-col gap-3'>
-                <GroupHome />
+                <GroupAdmin />
                 <FriendsHome />
               </div>
 
