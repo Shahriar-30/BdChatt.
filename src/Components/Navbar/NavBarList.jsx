@@ -21,7 +21,7 @@ function NavBarList() {
                     </Link>
                 </li>
                 <li>
-                    <Link to={'/'}>
+                    <Link to={'/message'}>
                         <abbr title="Chats">
                             <div className='transition-all duration-600  hover:bg-[rgba(0,0,0,0.19)] p-[6px] rounded-md'>
                                 <IoMdChatboxes className='text-[28px] ' />
