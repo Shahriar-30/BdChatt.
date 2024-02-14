@@ -7,7 +7,7 @@ function Msg() {
   return (
     <>
         <div className='h-screen w-full flex flex-col bg-white '>
-            <div className=' flex items-center shadow-[0px_2px_2px_0px_#22309B] gap-4 p-2'> 
+            <div className=' flex items-center  gap-4 p-2'> 
                 <TopMsg />
             </div>
             <div className='h-full w-full p-2 overflow-y-scroll '>
