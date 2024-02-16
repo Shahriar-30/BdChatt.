@@ -13,7 +13,7 @@ function TopMsg() {
     return (
         <>
             <img src="User.png" className='rounded-full w-[50px] ' />
-            <h5 className='font-bold text-[18px]'>{data.uid == friendData.receverId ? friendData.sender : friendData.recever}</h5>
+            <h5 className='font-bold text-[18px]'>{friendData.name}</h5>
         </>
     )
 }

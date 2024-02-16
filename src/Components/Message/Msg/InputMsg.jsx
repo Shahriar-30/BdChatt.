@@ -24,46 +24,28 @@ function InputMsg() {
         if (msg == '') {
             setEmpty(true);
         } else {
-            if (data.uid == friendData.senderId) {
-                setLoading(true);
-                set(push(ref(db, 'Msg/')), {
-                    sender_msg: data.displayName,
-                    sender_id: data.uid,
-                    recever_msg: friendData.recever,
-                    recever_id: friendData.receverId,
-                    msg,
-                }).then(() => {
-                    setMsg("")
+            setLoading(true);
+            set(push(ref(db, 'Msg/')), {
+                sender_msg: data.displayName,
+                sender_id: data.uid,
+                recever_msg: friendData.name,
+                recever_id: friendData.id,
+                msg,
+            }).then(() => {
+                setMsg("")
+            })
+                .catch((e) => {
+                    console.log(e);
+                    alert("something went wrong! contact to developer");
                 })
-                    .catch((e) => {
-                        console.log(e);
-                        alert("something went wrong! contact to developer");
-                    })
-                    .finally(() => {
-                        setLoading(false)
-                    })
-            } else if (data.uid == friendData.receverId) {
-                setLoading(true);
-                set(push(ref(db, 'Msg/')), {
-                    sender_msg: data.displayName,
-                    sender_id: data.uid,
-                    recever_msg: friendData.sender,
-                    recever_id: friendData.senderId,
-                    msg,
-                }).then(() => {
-                    setMsg("")
+                .finally(() => {
+                    setLoading(false)
                 })
-                    .catch((e) => {
-                        console.log(e);
-                        alert("something went wrong! contact to developer");
-                    })
-                    .finally(() => {
-                        setLoading(false)
-                    })
-            } else {
-                alert("somthing went wrong! contact to developer.")
-            }
         }
+
+
+
+
 
     }
 

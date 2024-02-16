@@ -16,9 +16,34 @@ function AllFriends() {
 
 
 
-    let makeSelect = (e)=>{
-       dispatch(addFriend(e))
-       localStorage.setItem("msg", JSON.stringify(e));
+    let makeSelect = (e) => {
+        if (data.uid == e.senderId) {
+            localStorage.setItem("msg", JSON.stringify({
+                name: e.recever,
+                id: e.receverId,
+                email: e.receverEmail
+            }))
+            dispatch(addFriend(
+                {
+                    name: e.recever,
+                    id: e.receverId,
+                    email: e.receverEmail
+                }
+            ))
+        } else if (data.uid == e.receverId) {
+            localStorage.setItem("msg", JSON.stringify({
+                name: e.sender,
+                id: e.senderId,
+                email: e.senderEmail
+            }))
+            dispatch(addFriend(
+                {
+                    name: e.sender,
+                    id: e.senderId,
+                    email: e.senderEmail
+                }
+            ))
+        }
     }
 
 
@@ -41,7 +66,7 @@ function AllFriends() {
             <div>
                 {
                     friendsData.map((e) => (
-                        <div className='p-2' key={e.id} onClick={()=> makeSelect(e)}>
+                        <div className='p-2' key={e.id} onClick={() => makeSelect(e)}>
                             <div className='  people_one p-4 w-full justify-normal transition-all duration-500   hover:bg-[rgba(73,80,87,0.18)] '>
                                 <img src="simon.png" className=' w-[40px] h-[40px] rounded-full' />
                                 <div>
