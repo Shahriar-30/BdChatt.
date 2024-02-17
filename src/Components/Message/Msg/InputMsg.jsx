@@ -6,6 +6,8 @@ import { db } from '../../../../FireBase';
 import { useSelector } from 'react-redux';
 import { Discuss } from 'react-loader-spinner';
 import EmojiPicker from 'emoji-picker-react';
+import { BsThreeDotsVertical } from "react-icons/bs";
+import OtherMsg from './OtherMsg';
 
 function InputMsg() {
 
@@ -20,7 +22,8 @@ function InputMsg() {
     const [msg, setMsg] = useState('');
     const [empty, setEmpty] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [emojiModal, setEmojiModal] = useState(false)
+    const [emojiModal, setEmojiModal] = useState(false);
+    const [more, setMore] = useState(false);
 
     let sendMsg = () => {
         if (msg == '') {
@@ -52,8 +55,10 @@ function InputMsg() {
 
     return (
         <>
-            <div className='w-full h-full flex items-center p-2'>
-                <div className='w-[40px]'>
+            {more && <OtherMsg />}
+            <div className='w-full h-full flex items-center p-2 '>
+                <div className='w-[40px] cursor-pointer '>
+                    <BsThreeDotsVertical className='text-[28px] font-bold' onClick={() => setMore(!more)} />
                 </div>
 
                 <div className={`w-full relative flex rounded-sm items-center border-black border ${empty && 'border-red-500'}`} >
