@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../Navbar/Navbar'
 import FriendMessage from './Friend/FriendMessage'
 import Msg from './Msg/Msg'
+import FriendProfile from './FriendProfile/FriendProfile'
 
 function Message() {
   return (
@@ -16,7 +17,9 @@ function Message() {
             <div className='h-screen w-full '>
               <Msg />
             </div>
-            <div className='h-screen w-full'>dd</div>
+            <div className='h-screen w-full'>
+              <FriendProfile />
+            </div>
         </div>
     </>
   )
