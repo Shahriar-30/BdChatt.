@@ -25,6 +25,8 @@ function InputMsg() {
     const [emojiModal, setEmojiModal] = useState(false);
     const [more, setMore] = useState(false);
 
+    const date = new Date();
+
     let sendMsg = () => {
         if (msg == '') {
             setEmpty(true);
@@ -36,6 +38,7 @@ function InputMsg() {
                 recever_msg: friendData.name,
                 recever_id: friendData.id,
                 msg,
+                time: `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${(date.getDate()).toString().padStart(2, '0')}${(date.getHours()).toString().padStart(2, '0')}${(date.getMinutes()).toString().padStart(2, '0')}`
             }).then(() => {
                 setMsg("")
             })
@@ -52,6 +55,8 @@ function InputMsg() {
     let makeEmoji = (e) => {
         setMsg(prevMsg => prevMsg + e.emoji);
     }
+    
+
 
     return (
         <>
@@ -67,7 +72,6 @@ function InputMsg() {
                             setMsg(e.target.value);
                             setEmpty(false);
                         }} />
-
                     <abbr title="emoji">
                         <div className=' bg-[#fff]  pr-2 cursor-pointer' >
                             {emojiModal && <div className=' absolute right-[-420px] bottom-0' >

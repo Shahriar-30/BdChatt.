@@ -39,3 +39,6 @@ body{
         @apply bg-[#eee] mt-2 p-2 rounded flex items-center justify-between gap-2
     }
 }
+.audio{
+    width: 500px;
+}

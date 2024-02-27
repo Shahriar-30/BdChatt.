@@ -14,7 +14,7 @@ function Message() {
             <div className='h-screen w-full '>
                 <FriendMessage />
             </div>
-            <div className='h-screen w-full '>
+            <div className='h-screen w-[130%] '>
               <Msg />
             </div>
             <div className='h-screen w-full'>
